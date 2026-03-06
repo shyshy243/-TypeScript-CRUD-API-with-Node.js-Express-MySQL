@@ -55,6 +55,7 @@ function createSchema(req: Request, res: Response, next: NextFunction): void {
         email: Joi.string().email().required(),
         password: Joi.string().min(6).required(),
         confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
+        phoneNumber: Joi.string().min(10).required(),
     });
     validateRequest(req, next, schema);
 }
@@ -68,6 +69,7 @@ function updateSchema(req: Request, res: Response, next: NextFunction): void {
         email: Joi.string().email().empty(''),
         password: Joi.string().min(6).empty(''),
         confirmPassword: Joi.string().valid(Joi.ref('password')).empty(''),
+        phoneNumber: Joi.string().min(10).empty(''),
     }).with('password', 'confirmPassword');
     validateRequest(req, next, schema);
 }

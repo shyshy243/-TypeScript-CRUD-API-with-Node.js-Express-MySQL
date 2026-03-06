@@ -10,6 +10,7 @@ export interface UserAttributes {
     firstName: string;
     lastName: string;
     role: string;
+    phoneNumber: string;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -28,6 +29,7 @@ export class User
     public firstName!: string;
     public lastName!: string;
     public role!: string;
+    public phoneNumber!: string;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 }
@@ -64,6 +66,13 @@ export default function (sequelize: Sequelize): typeof User{
             role: {
                 type: DataTypes.STRING,
                 allowNull: false,
+            },
+            phoneNumber: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    len: [10, 20],
+                },
             },
             createdAt: {
                 type: DataTypes.DATE,
